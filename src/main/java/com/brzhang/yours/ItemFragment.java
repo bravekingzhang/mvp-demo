@@ -90,7 +90,16 @@ public class ItemFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        String request_url = "http://test.igame.qq.com/am/index.php?of=json";
+        //这个链接可以拿到json数组，类似这种格式。
+        /*{
+        url: "http://www.dytt8.net/html/gndy/dyzz/20151220/49782.html",
+        move_pic: "http://img.hao224.com/zhuanti/2015/11/25/163220_64882.jpg",
+        move_name: "2015年刘德华《解救吾先生》HD国语中字"
+        },*/
+
+        String request_url = "http://test.xxx.xxx.com/am/index.php?of=json";
+        
+        
 
         StringRequest stringRequest = new StringRequest(request_url, new Response.Listener<String>() {
             @Override
