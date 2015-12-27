@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 /**
  * Created by brzhang on 15/12/24.
- * Description :
+ * Description :拦截默认浏览器打开行为
  */
 public class MyLinkMovementMethod extends LinkMovementMethod {
 
@@ -42,9 +42,10 @@ public class MyLinkMovementMethod extends LinkMovementMethod {
                 if (action == MotionEvent.ACTION_UP) {
                     link[0].onClick(widget);
                 }
+                return true;
             }
         }
-        return true;
+        return false;
         //return super.onTouchEvent(widget, buffer, event);
 
     }
