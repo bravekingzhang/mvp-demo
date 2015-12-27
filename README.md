@@ -5,7 +5,13 @@
 
 * 已经采用mvp模式重构，欢迎大家劈砖
 
+
+#无耻的秀一下
+![image](https://github.com/bravekingzhang/yours/blob/master/screenshot/device-2015-12-27-160354.png)
+![image](https://github.com/bravekingzhang/yours/blob/master/screenshot/device-2015-12-27-160433.png)
+
 #todo
+
 ```
 1. 将RXandriod引入，从而使这个app的整个架构称得上是全球最流行的架构，不管他适不适合，反正麻雀虽小，五脏得俱全吧
 
