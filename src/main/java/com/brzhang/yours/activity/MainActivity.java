@@ -1,4 +1,4 @@
-package com.brzhang.yours;
+package com.brzhang.yours.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -12,9 +12,10 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.brzhang.yours.model.Move;
+import com.brzhang.yours.fragment.MoveListFragment;
+import com.brzhang.yours.R;
 
-public class MainActivity extends AppCompatActivity implements ItemFragment.OnListFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
     }
 
     private void setupFragment() {
-        ItemFragment itemFragment = new ItemFragment();
+        MoveListFragment itemFragment = new MoveListFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.fragment_container,itemFragment);
@@ -65,10 +66,5 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onListFragmentInteraction(Move item) {
-
     }
 }

@@ -1,26 +1,25 @@
-package com.brzhang.yours;
+package com.adapter;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.SpannableStringBuilder;
-import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.brzhang.yours.ItemFragment.OnListFragmentInteractionListener;
+import com.brzhang.yours.R;
 import com.brzhang.yours.model.Move;
 import com.bumptech.glide.Glide;
+import com.utils.MyLinkMovementMethod;
 
 
 import java.util.List;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link Move} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
 public class MoveRecyclerViewAdapter extends RecyclerView.Adapter<MoveRecyclerViewAdapter.ViewHolder> {
@@ -36,11 +35,11 @@ public class MoveRecyclerViewAdapter extends RecyclerView.Adapter<MoveRecyclerVi
     }
 
     private List<Move>                        mValues;
-    private OnListFragmentInteractionListener mListener;
+    private Activity mActivity;
 
-    public MoveRecyclerViewAdapter(List<Move> items, OnListFragmentInteractionListener listener) {
+    public MoveRecyclerViewAdapter(List<Move> items,Activity activity) {
         mValues = items;
-        mListener = listener;
+        mActivity = activity;
     }
 
     @Override
@@ -59,9 +58,9 @@ public class MoveRecyclerViewAdapter extends RecyclerView.Adapter<MoveRecyclerVi
         SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder();
         spannableStringBuilder.append("<a href='").append(move.getUrl()).append("'>点击此处查看详情</a>");
         holder.mMoveSrc.setText(Html.fromHtml(spannableStringBuilder.toString()));
-        holder.mMoveSrc.setMovementMethod(LinkMovementMethod.getInstance());
+        holder.mMoveSrc.setMovementMethod(MyLinkMovementMethod.getInstance());
         holder.mMoveName.setText(move.getmMoveName());
-        Glide.with((Activity) mListener).load(move.getmMovePic()).into(holder.mMovePic);
+        Glide.with(mActivity).load(move.getmMovePic()).into(holder.mMovePic);
     }
 
     @Override

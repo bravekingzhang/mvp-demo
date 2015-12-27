@@ -2,7 +2,7 @@ package com.brzhang.yours.model;
 
 /**
  * Created by brzhang on 15/12/21.
- * Description :
+ * Description :数据基本模型
  */
 public class Move {
     private String url;
