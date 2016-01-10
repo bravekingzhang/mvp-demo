@@ -5,6 +5,10 @@
 
 * 已经采用mvp模式重构，欢迎大家劈砖
 
+* 引入了rxandroid  ，响应式编程，绝对是未来的趋势
+
+* 引入了rxbinding ，为嘛要这玩意，看看这里你就了解了https://medium.com/@diolor/improving-ux-with-rxjava-4440a13b157f#.prs4xw4jh
+
 
 #无耻的秀一下
 ![image](https://github.com/bravekingzhang/yours/blob/master/screenshot/device-2015-12-27-160354.png)
@@ -24,6 +28,6 @@
 
 *  准备引入retrofit  https://github.com/square/retrofit
 
-*  RxBinding也准备引入，防重复提交是就一行代码，爽
+*  【已经引入】RxBinding也准备引入，防重复提交是就一行代码，爽
 
 
