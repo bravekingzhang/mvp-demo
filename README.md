@@ -1,5 +1,15 @@
 # yours
-一个属于你自己的关于展示最近电影的app
+一个属于你自己的关于推荐最近电影的app
+
+###电影爬虫采用python写的
+* 地址 https://github.com/bravekingzhang/moveSpider
+  单线程而已，初步实现，后期打算做成多线程，加速爬取效率。
+  爬取的结果存了两种，html，json，json用户我们的移动app
+
+###web服务器
+  我的测试机，一个php文件，就两行代码而已，of参数html表示输出网页，json表示输出json，太加单，就不建一个项目咯，后期分页处理考虑加上。
+  
+### app侧
 
 * 全部使用原生控件编写，拒绝使用自定义组件，google已经对UI做的很好了，何必装逼，页面全部采用fragment，activity只作为容器装fragment而已。
 
