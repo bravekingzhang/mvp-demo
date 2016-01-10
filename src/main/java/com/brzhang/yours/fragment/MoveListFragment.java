@@ -24,6 +24,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 /**
  * A fragment representing a list of Items.
  * <p/>
@@ -35,9 +38,11 @@ public class MoveListFragment extends Fragment implements MoveListView {
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private              int    mColumnCount     = 1;
-    private RecyclerView            mRecyclerView;
+    @Bind(R.id.recyclerview)
+    RecyclerView            mRecyclerView;
     private MoveRecyclerViewAdapter mMoveRecyclerViewAdapter;
-    private ProgressBar             mProgressBar;
+    @Bind(R.id.progress)
+    ProgressBar             mProgressBar;
 
     private MoveListPresenter moveListPresenter;
 
@@ -72,14 +77,13 @@ public class MoveListFragment extends Fragment implements MoveListView {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_item_list, container, false);
-        mProgressBar = (ProgressBar) view.findViewById(R.id.progress);
+        ButterKnife.bind(this,view);
         setupView(view);
         return view;
     }
 
     private void setupView(View view) {
         // Set the adapter
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
         if (mColumnCount <= 1) {
             mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         } else {
