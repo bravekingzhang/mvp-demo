@@ -12,19 +12,18 @@
 
 #todo
 
-```
-~~1. 将RXandriod引入，从而使这个app的整个架构称得上是全球最流行的架构，不管他适不适合，反正麻雀虽小，五脏得俱全吧~~
+* **【已经支持】将RXandriod引入，从而使这个app的整个架构称得上是全球最流行的架构，不管他适不适合，反正麻雀虽小，五脏得俱全吧~
 
-2.  使用realm（好像最近口碑确实不错）作为我们的数据库缓存，这样，即便没有网络，我们也能嗨一番，不是吗？
+*  使用realm（好像最近口碑确实不错）作为我们的数据库缓存，这样，即便没有网络，我们也能嗨一番，不是吗？
 
-3. 丰富我们的python爬虫，准备采用多线程爬取，以及解决爬取内容太过单一的问题，爬虫项目在这里https://github.com/bravekingzhang/moveSpider
+* 丰富我们的python爬虫，准备采用多线程爬取，以及解决爬取内容太过单一的问题，爬虫项目在这里https://github.com/bravekingzhang/moveSpider
 
-4.  重构我们的web接口，使得其支持分页加载，现在一次性将所有数据返回，确实挺拽的。
+*  重构我们的web接口，使得其支持分页加载，现在一次性将所有数据返回，确实挺拽的。
 
-~~5.  准备引入 butterknife  https://github.com/JakeWharton/butterknife~~
+*  【已经支持】准备引入 butterknife  https://github.com/JakeWharton/butterknife~
 
-6.  准备引入retrofit  https://github.com/square/retrofit
+*  准备引入retrofit  https://github.com/square/retrofit
 
-7.  RxBinding也准备引入，防重复提交是就一行代码，爽
+*  RxBinding也准备引入，防重复提交是就一行代码，爽
 
-```
+
