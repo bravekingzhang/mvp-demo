@@ -17,10 +17,8 @@ import java.util.List;
 
 import rx.Observable;
 import rx.Subscriber;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
+import rx.functions.Action1;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.android.schedulers.HandlerScheduler;
 
 /**
  * Created by brzhang on 15/12/27.
@@ -30,61 +28,35 @@ import rx.android.schedulers.HandlerScheduler;
  */
 public class GetMovesImpl implements GetMoves {
     private static final String Tag = GetMovesImpl.class.getName();
-    @Override
-    public void getMovesFromNet(final OnFinishedListener listener) {
 
-        Observable.just("已", "经", "全", "部", "为","您","读","出","啦")
-                .filter(new Func1<String, Boolean>() {
+    public Observable<List<Move>> getMovesObservable(){
+        return Observable.create(new Observable.OnSubscribe<List<Move>>() {
+            @Override
+            public void call(final Subscriber<? super List<Move>> subscriber) {
+                String request_url = "http://test.igame.qq.com/am/index.php?of=json";
+                StringRequest stringRequest = new StringRequest(request_url, new Response.Listener<String>() {
                     @Override
-                    public Boolean call(String s) {
+                    public void onResponse(String response) {
+                        Gson gson = new Gson();
                         try {
-                            Thread.sleep(1000);
-                        } catch ( InterruptedException e ) {
-                            e.printStackTrace();
+                            List<Move> moveList = gson.fromJson(response,
+                                    new TypeToken<List<Move>>() {
+                                    }.getType());
+                            subscriber.onNext(moveList);
+                        } catch ( Exception e ) {
+                            subscriber.onError(new Throwable("哎呀，json解析错误啊"));
                         }
-                        return true;
-                    }
-                })
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<String>() {
-                    @Override
-                    public void onCompleted() {
-                        Log.e(Tag, "onCompleted");
-                    }
 
-                    @Override
-                    public void onError(Throwable throwable) {
-                        Log.e(Tag, "onError");
                     }
-
+                }, new Response.ErrorListener() {
                     @Override
-                    public void onNext(String s) {
-                        listener.onError(s);
+                    public void onErrorResponse(VolleyError error) {
+                        subscriber.onError(new Throwable("你的网络尽然如此的渣啊！"));
                     }
                 });
-        String request_url = "http://test.igame.qq.com/am/index.php?of=json";
-
-        StringRequest stringRequest = new StringRequest(request_url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Gson gson = new Gson();
-                try {
-                    List<Move> moveList = gson.fromJson(response,
-                            new TypeToken<List<Move>>() {
-                            }.getType());
-                    listener.onSuccess(moveList);
-                } catch ( Exception e ) {
-                    listener.onError("哎呀，json解析错误");
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                listener.onError("不好，你的网络环境如此之渣");
+                Volley.newRequestQueue(App.getAppContext()).add(stringRequest);
             }
         });
-        Volley.newRequestQueue(App.getAppContext()).add(stringRequest);
+
     }
 }
