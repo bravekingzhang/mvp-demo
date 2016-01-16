@@ -1,6 +1,7 @@
 package com.brzhang.yours.model;
 
 
+import android.content.Context;
 import android.nfc.Tag;
 import android.util.Log;
 
@@ -11,10 +12,17 @@ import com.android.volley.toolbox.Volley;
 import com.brzhang.yours.App;
 import com.brzhang.yours.listener.OnFinishedListener;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.logging.Logger;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import io.realm.RealmQuery;
+import io.realm.RealmResults;
 import rx.Observable;
 import rx.Subscriber;
 import rx.functions.Action1;
@@ -29,7 +37,7 @@ import rx.android.schedulers.AndroidSchedulers;
 public class GetMovesImpl implements GetMoves {
     private static final String Tag = GetMovesImpl.class.getName();
 
-    public Observable<List<Move>> getMovesObservable(){
+    public Observable<List<Move>> getMovesFromNetObservable(){
         return Observable.create(new Observable.OnSubscribe<List<Move>>() {
             @Override
             public void call(final Subscriber<? super List<Move>> subscriber) {
@@ -37,7 +45,7 @@ public class GetMovesImpl implements GetMoves {
                 StringRequest stringRequest = new StringRequest(request_url, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Gson gson = new Gson();
+                        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
                         try {
                             List<Move> moveList = gson.fromJson(response,
                                     new TypeToken<List<Move>>() {
@@ -58,5 +66,19 @@ public class GetMovesImpl implements GetMoves {
             }
         });
 
+    }
+
+    @Override
+    public Observable<RealmResults<Move>> getMovesFromCacheObservable(final Context context) {
+        return Observable.create(new Observable.OnSubscribe<RealmResults<Move>>() {
+            @Override
+            public void call(Subscriber<? super RealmResults<Move>> subscriber) {
+                RealmConfiguration configuration = new RealmConfiguration.Builder(context).build();
+                Realm realm = Realm.getInstance(configuration);
+                RealmQuery<Move> query = realm.where(Move.class);
+                RealmResults<Move> moveList = query.findAll();
+                subscriber.onNext(moveList);
+            }
+        });
     }
 }

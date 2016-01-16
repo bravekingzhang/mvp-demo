@@ -1,9 +1,10 @@
 package com.brzhang.yours.model;
 
-import com.brzhang.yours.listener.OnFinishedListener;
+import android.content.Context;
 
 import java.util.List;
 
+import io.realm.RealmResults;
 import rx.Observable;
 
 /**
@@ -11,5 +12,6 @@ import rx.Observable;
  * Description :搬运工抽象接口定义
  */
 public interface GetMoves {
-    public Observable<List<Move>> getMovesObservable();
+    Observable<List<Move>> getMovesFromNetObservable();
+    Observable<RealmResults<Move>> getMovesFromCacheObservable(Context context);//从缓存获取
 }

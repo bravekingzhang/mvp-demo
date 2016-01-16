@@ -15,7 +15,6 @@ import com.brzhang.yours.R;
 import com.brzhang.yours.model.Move;
 import com.bumptech.glide.Glide;
 import com.jakewharton.rxbinding.view.RxView;
-import com.jakewharton.rxbinding.widget.RxTextView;
 import com.utils.MyLinkMovementMethod;
 
 
@@ -24,7 +23,6 @@ import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import rx.functions.Action1;
 
 /**
@@ -62,8 +60,8 @@ public class MoveRecyclerViewAdapter extends RecyclerView.Adapter<MoveRecyclerVi
         spannableStringBuilder.append("<a href='").append(move.getUrl()).append("'>点击此处查看详情</a>");
         holder.mMoveSrc.setText(Html.fromHtml(spannableStringBuilder.toString()));
         holder.mMoveSrc.setMovementMethod(MyLinkMovementMethod.getInstance());
-        holder.mMoveName.setText(move.getmMoveName());
-        Glide.with(mActivity).load(move.getmMovePic()).into(holder.mMovePic);
+        holder.mMoveName.setText(move.getMove_name());
+        Glide.with(mActivity).load(move.getMove_pic()).into(holder.mMovePic);
         //防止重复点击
         RxView.clicks(holder.mMoveName)
                 .debounce(1500, TimeUnit.MILLISECONDS)
