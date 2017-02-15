@@ -1,4 +1,4 @@
-# yours
+# MVP-DEMO
 一个属于你自己的关于推荐最近电影的app
 
 ###电影爬虫采用python写的
